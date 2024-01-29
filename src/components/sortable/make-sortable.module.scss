@@ -1,5 +1,25 @@
 .makeSortable {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    border: #646cff 0.125rem solid;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    // gap: 1rem;
+
+    .indicator {
+        // border: rgba($color: #646cff, $alpha: 1) 1px solid;
+        transition: width 0.25s ease-in-out;
+        transform-origin: center;
+        animation: grow 0.2s ease-in-out;
+        z-index: -10;
+    }
+}
+
+@keyframes grow {
+    0% {
+        transform: scaleX(0);
+    }
+    100% {
+        transform: scaleX(1);
+    }
 }

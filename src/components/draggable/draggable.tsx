@@ -25,6 +25,10 @@ export const Dragable = ({
 
     const handleOnDragStart = (e: React.DragEvent<HTMLDivElement>) => {
         e.dataTransfer.setData("text/plain", id);
+        // const ghost = document.createElement("img");
+        // ghost.src =
+        //     "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+        // e.dataTransfer.setDragImage(ghost, 0, 0);
         onDragStart(e);
     };
 
@@ -46,23 +50,38 @@ export const Dragable = ({
         <div
             id={id}
             data-index={dataIndex}
-            className={styles.draggableContainer}
+            // className={styles.draggableContainer}
             draggable={isDraggable}
             onDragStart={handleOnDragStart}
             onDragEnter={handleOnDragEnter}
             onDragEnd={handleOnDragEnd}
             onDragOver={(e) => e.preventDefault()}
             onDrop={handleOnDrop}
+            style={{
+                paddingBlock: "1rem",
+            }}
         >
             <div
-                id={id}
-                className={styles.dragHandle}
-                onMouseDown={() => setIsDraggable(true)}
-                onMouseUp={() => setIsDraggable(false)}
+                // id={id}
+                // data-index={dataIndex}
+                className={styles.draggableContainer}
+                // draggable={isDraggable}
+                // onDragStart={handleOnDragStart}
+                // onDragEnter={handleOnDragEnter}
+                // onDragEnd={handleOnDragEnd}
+                // onDragOver={(e) => e.preventDefault()}
+                // onDrop={handleOnDrop}
             >
-                <Icons name="grip-vertical" size={16} />
+                <div
+                    id={id}
+                    className={styles.dragHandle}
+                    onMouseDown={() => setIsDraggable(true)}
+                    onMouseUp={() => setIsDraggable(false)}
+                >
+                    <Icons name="grip-vertical" size={16} />
+                </div>
+                <div className={styles.dragContent}>{children}</div>
             </div>
-            <div className={styles.dragContent}>{children}</div>
         </div>
     );
 };

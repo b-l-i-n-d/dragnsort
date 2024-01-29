@@ -1,57 +1,83 @@
 import { ReactNode, useState } from "react";
 import "./App.scss";
+import { Icons } from "./components/icons";
 import { MakeSortable } from "./components/sortable/make-sortable";
 
 function App() {
     const [items, setItems] = useState<ReactNode[]>([
-        <div
-            style={{
-                width: "10rem",
-            }}
-        >
-            Item 1
+        <div className="draggable-wrapper">
+            <div
+                className="draggable"
+                style={{
+                    width: "20rem",
+                }}
+            >
+                <div className="drag-handle">
+                    <Icons name="grip-vertical" />
+                </div>
+                <div className="drag-content">Item 1</div>
+            </div>
         </div>,
-        <div
-            style={{
-                width: "10rem",
-            }}
-        >
-            Item 2
+        <div className="draggable-wrapper">
+            <div
+                className="draggable"
+                style={{
+                    width: "20rem",
+                }}
+            >
+                <div className="drag-handle">
+                    <Icons name="grip-vertical" />
+                </div>
+                <div className="drag-content">Item 2</div>
+            </div>
         </div>,
-        <div
-            style={{
-                width: "10rem",
-            }}
-        >
-            Item 3
+        <div className="draggable-wrapper">
+            <div
+                className="draggable"
+                style={{
+                    width: "20rem",
+                }}
+            >
+                <div className="drag-handle">
+                    <Icons name="grip-vertical" />
+                </div>
+                <div className="drag-content">Item 3</div>
+            </div>
         </div>,
-        <div
-            style={{
-                width: "10rem",
-            }}
-        >
-            Item 4
+        <div className="draggable-wrapper">
+            <div
+                className="draggable"
+                style={{
+                    width: "20rem",
+                }}
+            >
+                <div className="drag-handle">
+                    <Icons name="grip-vertical" />
+                </div>
+                <div className="drag-content">Item 4</div>
+            </div>
         </div>,
-        <div
-            style={{
-                width: "10rem",
-            }}
-        >
-            Item 5
+        <div className="draggable-wrapper">
+            <div
+                className="draggable"
+                style={{
+                    width: "20rem",
+                }}
+            >
+                <div className="drag-handle">
+                    <Icons name="grip-vertical" />
+                </div>
+                <div className="drag-content">Item 5</div>
+            </div>
         </div>,
     ]);
 
-    const onSort = (newItems: ReactNode[]) => {
-        setItems(newItems);
+    const onSort = (items: ReactNode[]) => {
+        setItems(items);
     };
 
     return (
-        <>
-            <MakeSortable
-                items={items}
-                onSort={(sortedItems) => onSort(sortedItems)}
-            />
-        </>
+        <MakeSortable items={items} onSort={(newItems) => onSort(newItems)} />
     );
 }
 
