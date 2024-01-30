@@ -60,10 +60,15 @@
             width: 2em;
             height: 2em;
             border-radius: 50%;
-            background-color: #646cff;
+            // background-color: #646cff;
             color: white;
             margin-right: 1em;
             cursor: grab;
+            transition: background-color 0.2ms ease;
+
+            &:hover {
+                background-color: rgba($color: #646cff, $alpha: 0.5);
+            }
         }
 
         .drag-content {

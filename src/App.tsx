@@ -72,12 +72,8 @@ function App() {
         </div>,
     ]);
 
-    const onSort = (items: ReactNode[]) => {
-        setItems(items);
-    };
-
     return (
-        <MakeSortable items={items} onSort={(newItems) => onSort(newItems)} />
+        <MakeSortable items={items} onSort={(newItems) => setItems(newItems)} />
     );
 }
 
