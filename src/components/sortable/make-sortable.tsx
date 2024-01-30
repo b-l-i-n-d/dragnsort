@@ -3,11 +3,16 @@ import { Fragment, ReactNode, useCallback, useEffect, useState } from "react";
 import styles from "./make-sortable.module.scss";
 
 interface MakeSortableProps {
+    itemData: unknown[];
     items: ReactNode[];
-    onSort: (items: ReactNode[]) => void;
+    onSort: (items: unknown[]) => void;
 }
 
-export const MakeSortable = ({ items, onSort }: MakeSortableProps) => {
+export const MakeSortable = ({
+    itemData,
+    items,
+    onSort,
+}: MakeSortableProps) => {
     const [currentDropTarget, setCurrentDropTarget] = useState<{
         id: number;
         position: "down" | "up";
@@ -63,14 +68,14 @@ export const MakeSortable = ({ items, onSort }: MakeSortableProps) => {
                 }
             }
 
-            const newItems = [...items];
-            const dragItem = newItems[dragIndex];
-            newItems.splice(dragIndex, 1);
-            newItems.splice(adjustedDropIndex, 0, dragItem);
+            const newItemData = [...itemData];
+            const dragItem = newItemData[dragIndex];
+            newItemData.splice(dragIndex, 1);
+            newItemData.splice(adjustedDropIndex, 0, dragItem);
             setCurrentDropTarget(null);
-            onSort(newItems);
+            onSort(newItemData);
         },
-        [items, onSort]
+        [itemData, items.length, onSort]
     );
 
     useEffect(() => {
@@ -167,7 +172,7 @@ export const MakeSortable = ({ items, onSort }: MakeSortableProps) => {
                 );
             });
         };
-    }, [handleOnDrop, currentDragItem]);
+    }, [handleOnDrop]);
 
     return (
         <div className={`${styles.makeSortable} make-sortable`}>
@@ -178,10 +183,8 @@ export const MakeSortable = ({ items, onSort }: MakeSortableProps) => {
                             index === currentDropTarget?.id &&
                             currentDropTarget.position === "up" && (
                                 <div
-                                    // draggable={true}
                                     id={index.toString()}
                                     data-index={index.toString()}
-                                    onDragEnter={handleOnDragEnter}
                                     onDragOver={(e) => e.preventDefault()}
                                     onDrop={handleOnDrop}
                                     className={styles.indicator}
@@ -192,10 +195,8 @@ export const MakeSortable = ({ items, onSort }: MakeSortableProps) => {
                             index === currentDropTarget?.id &&
                             currentDropTarget.position === "down" && (
                                 <div
-                                    // draggable={true}
                                     id={index.toString()}
                                     data-index={index.toString()}
-                                    onDragEnter={handleOnDragEnter}
                                     onDragOver={(e) => e.preventDefault()}
                                     onDrop={handleOnDrop}
                                     className={styles.indicator}
