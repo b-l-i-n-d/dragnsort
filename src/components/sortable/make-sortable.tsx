@@ -78,6 +78,17 @@ export const MakeSortable = ({
         [itemData, items.length, onSort]
     );
 
+    const isUpIndicator = (index: number) =>
+        currentDragItem !== index &&
+        Number(currentDragItem) + 1 !== currentDropTarget?.id &&
+        index === currentDropTarget?.id &&
+        currentDropTarget?.position === "up";
+    const isDownIndicator = (index: number) =>
+        currentDragItem !== index &&
+        Number(currentDragItem) - 1 !== currentDropTarget?.id &&
+        index === currentDropTarget?.id &&
+        currentDropTarget.position === "down";
+
     useEffect(() => {
         if (currentDragItem !== null) {
             document.body
@@ -179,29 +190,25 @@ export const MakeSortable = ({
             {items.map((item, index) => {
                 return (
                     <Fragment key={index}>
-                        {currentDragItem !== index &&
-                            index === currentDropTarget?.id &&
-                            currentDropTarget.position === "up" && (
-                                <div
-                                    id={index.toString()}
-                                    data-index={index.toString()}
-                                    onDragOver={(e) => e.preventDefault()}
-                                    onDrop={handleOnDrop}
-                                    className={styles.indicator}
-                                />
-                            )}
+                        {isUpIndicator(index) && (
+                            <div
+                                id={index.toString()}
+                                data-index={index.toString()}
+                                onDragOver={(e) => e.preventDefault()}
+                                onDrop={handleOnDrop}
+                                className={styles.indicator}
+                            />
+                        )}
                         {item}
-                        {currentDragItem !== index &&
-                            index === currentDropTarget?.id &&
-                            currentDropTarget.position === "down" && (
-                                <div
-                                    id={index.toString()}
-                                    data-index={index.toString()}
-                                    onDragOver={(e) => e.preventDefault()}
-                                    onDrop={handleOnDrop}
-                                    className={styles.indicator}
-                                />
-                            )}
+                        {isDownIndicator(index) && (
+                            <div
+                                id={index.toString()}
+                                data-index={index.toString()}
+                                onDragOver={(e) => e.preventDefault()}
+                                onDrop={handleOnDrop}
+                                className={styles.indicator}
+                            />
+                        )}
                     </Fragment>
                 );
             })}
