@@ -16,8 +16,8 @@ export const Dragable = ({
     style,
 }: DragableProps) => {
     return (
-        <div className={`${styles.draggableWrapper} ${className}`}>
-            <div className={`${styles.draggable}`} style={style}>
+        <div className={`${styles.draggableWrapper}`}>
+            <div className={`${styles.draggable} ${className}`} style={style}>
                 <div className={`${styles.dragHandle} drag-handle`}>
                     {dragHandle ? dragHandle : <Icons name="grip-vertical" />}
                 </div>
