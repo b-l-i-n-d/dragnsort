@@ -1,84 +1,25 @@
-import { useState } from "react";
 import { Icons } from "../icons";
+
 import styles from "./draggable.module.scss";
 
 interface DragableProps {
-    id: string;
-    dataIndex: number;
+    dragHandle?: React.ReactNode;
+    className?: string;
     children: React.ReactNode;
-    onDragStart: (e: React.DragEvent<HTMLDivElement>) => void;
-    onDragEnter: (e: React.DragEvent<HTMLDivElement>) => void;
-    onDragEnd: () => void;
-    onDrop: (e: React.DragEvent<HTMLDivElement>) => void;
+    style?: React.CSSProperties;
 }
 
 export const Dragable = ({
-    id,
-    dataIndex,
     children,
-    onDragStart,
-    onDragEnter,
-    onDragEnd,
-    onDrop,
+    dragHandle,
+    className,
+    style,
 }: DragableProps) => {
-    const [isDraggable, setIsDraggable] = useState(false);
-
-    const handleOnDragStart = (e: React.DragEvent<HTMLDivElement>) => {
-        e.dataTransfer.setData("text/plain", id);
-        // const ghost = document.createElement("img");
-        // ghost.src =
-        //     "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
-        // e.dataTransfer.setDragImage(ghost, 0, 0);
-        onDragStart(e);
-    };
-
-    const handleOnDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
-        onDragEnter(e);
-    };
-
-    const handleOnDragEnd = () => {
-        setIsDraggable(false);
-        onDragEnd();
-    };
-
-    const handleOnDrop = (e: React.DragEvent<HTMLDivElement>) => {
-        setIsDraggable(false);
-        onDrop(e);
-    };
-
     return (
-        <div
-            id={id}
-            data-index={dataIndex}
-            // className={styles.draggableContainer}
-            draggable={isDraggable}
-            onDragStart={handleOnDragStart}
-            onDragEnter={handleOnDragEnter}
-            onDragEnd={handleOnDragEnd}
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={handleOnDrop}
-            style={{
-                paddingBlock: "1rem",
-            }}
-        >
-            <div
-                // id={id}
-                // data-index={dataIndex}
-                className={styles.draggableContainer}
-                // draggable={isDraggable}
-                // onDragStart={handleOnDragStart}
-                // onDragEnter={handleOnDragEnter}
-                // onDragEnd={handleOnDragEnd}
-                // onDragOver={(e) => e.preventDefault()}
-                // onDrop={handleOnDrop}
-            >
-                <div
-                    id={id}
-                    className={styles.dragHandle}
-                    onMouseDown={() => setIsDraggable(true)}
-                    onMouseUp={() => setIsDraggable(false)}
-                >
-                    <Icons name="grip-vertical" size={16} />
+        <div className={`${styles.draggableWrapper} ${className}`}>
+            <div className={`${styles.draggable}`} style={style}>
+                <div className={`${styles.dragHandle} drag-handle`}>
+                    {dragHandle ? dragHandle : <Icons name="grip-vertical" />}
                 </div>
                 <div className={styles.dragContent}>{children}</div>
             </div>

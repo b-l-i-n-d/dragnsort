@@ -40,39 +40,3 @@
 .read-the-docs {
     color: #888;
 }
-
-.draggable-wrapper {
-    padding: 0.5rem;
-    user-select: none;
-
-    .draggable {
-        background-color: #242424;
-        display: flex;
-        border: #646cff 0.125rem dashed;
-        align-items: center;
-        padding: 0.5rem;
-        border-radius: 1rem;
-
-        .drag-handle {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 2em;
-            height: 2em;
-            border-radius: 50%;
-            // background-color: #646cff;
-            color: white;
-            margin-right: 1em;
-            cursor: grab;
-            transition: background-color 0.2ms ease;
-
-            &:hover {
-                background-color: rgba($color: #646cff, $alpha: 0.5);
-            }
-        }
-
-        .drag-content {
-            flex-grow: 1;
-        }
-    }
-}
